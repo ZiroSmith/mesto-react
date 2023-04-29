@@ -7,7 +7,6 @@ function EditAvatarPopup({ isOpen, onClose }) {
     <PopupWithForm
       title={'Редактировать профиль'}
       name={'item'}
-      buttonText={'Сохранить'}
       isOpen={isOpen}
       onClose={onClose}
     >
