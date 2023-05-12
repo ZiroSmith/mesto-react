@@ -27,7 +27,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     });
   }
 
-
   return (
     <PopupWithForm
       title={'Редактировать профиль'}
