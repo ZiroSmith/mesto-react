@@ -1,7 +1,32 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ isOpen, onClose }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+
+  const [name, setName] = React.useState('');
+  const [link, setLink] = React.useState('');
+
+  React.useEffect(() => {
+    setName('');
+    setLink('');
+  }, [isOpen])
+
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleChangeLink(evt) {
+    setLink(evt.target.value); 
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onAddPlace({
+      name: name,
+      link: link,
+    });
+  }
+
 
   return (
     <PopupWithForm
@@ -10,6 +35,7 @@ function EditAvatarPopup({ isOpen, onClose }) {
       buttonText={'Создать'}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
     <input
         type="text"
@@ -18,6 +44,7 @@ function EditAvatarPopup({ isOpen, onClose }) {
         required
         className="form__input form__input_type_title"
         id="place-input"
+        onChange={handleChangeName}
       />
     <span 
         id="place-input-error"
@@ -29,7 +56,8 @@ function EditAvatarPopup({ isOpen, onClose }) {
         placeholder="Ссылка на картинку"
         required
         className="form__input form__input_type_link"
-        id="url-input"   
+        id="url-input"
+        onChange={handleChangeLink}
     />
     <span 
         id="profession-input-error" 
@@ -39,4 +67,4 @@ function EditAvatarPopup({ isOpen, onClose }) {
   );
 }
 
-export default EditAvatarPopup;
+export default AddPlacePopup;

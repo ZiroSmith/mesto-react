@@ -1,10 +1,9 @@
 import React from 'react';
-import {useState, useEffect} from "react";
-import { api } from "../utils/Api";
 import Card from "./Card";
 import { CurrentUserContext } from './contexts/CurrentUserContext.js';
 
 function Main({ 
+    cards,
     onEditAvatar,
     onEditProfile,
     onAddPlace,
@@ -14,20 +13,6 @@ function Main({
 
     const currentUser = React.useContext(CurrentUserContext);
 
-    const [cards, setCards] = useState([]);
-
-
-      function setCardsData() {
-        api.getInitialCards()
-          .then((cardsData) => {
-            setCards(cardsData);
-          })
-          .catch((err) => console.log(`Ошибка: ${err}`));
-      }
-
-      useEffect(() => {
-        setCardsData();
-      }, []);
 
     return (
         <main className="content">
