@@ -35,14 +35,11 @@ export class Api {
   }
 
   //Метод для редактирования информации в профиле
-  editUserInfo(data) {
+  editUserInfo({ name, about }) {
     return this._checkRequest(`users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        about: data.job
-      })
+      body: JSON.stringify({ name, about })
     })
   }
 

@@ -1,7 +1,34 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
+import { CurrentUserContext } from './contexts/CurrentUserContext.js';
 
-function EditAvatarPopup({ isOpen, onClose }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+  const [name, setName] = React.useState('');
+  const [description, setDescription ] = React.useState('');
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]); 
+
+  function handleChangeName(evt) {
+    setName(evt.target.value);
+  }
+
+  function handleChangeDescription(evt) {
+    setDescription(evt.target.value); 
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name: name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
@@ -9,6 +36,7 @@ function EditAvatarPopup({ isOpen, onClose }) {
       name={'item'}
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
     <input
         type="text"
@@ -17,6 +45,7 @@ function EditAvatarPopup({ isOpen, onClose }) {
         required
         className="form__input form__input_type_name"
         id="name-input"
+        onChange={handleChangeName}
       />
     <span 
         id="name-input-error"
@@ -28,7 +57,8 @@ function EditAvatarPopup({ isOpen, onClose }) {
         placeholder="Профессия"
         required
         className="form__input form__input_type_profession"
-        id="profession-input"   
+        id="profession-input"  
+        onChange={handleChangeDescription} 
     />
     <span 
         id="profession-input-error" 
@@ -38,4 +68,4 @@ function EditAvatarPopup({ isOpen, onClose }) {
   );
 }
 
-export default EditAvatarPopup;
+export default EditProfilePopup;

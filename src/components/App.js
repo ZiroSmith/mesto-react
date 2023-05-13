@@ -6,7 +6,6 @@ import { api } from "../utils/Api";
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
-import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import { CurrentUserContext } from './contexts/CurrentUserContext.js';
 
@@ -44,6 +43,26 @@ function App() {
     .addCard(data)
     .then((newCard) => {
       setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch(err => console.log(`${err}`))
+  }
+
+  function handleUpdateUser(data) {
+    api
+    .editUserInfo(data)
+    .then((newData) => {
+      setCurrentUser(newData);
+      closeAllPopups();
+    })
+    .catch(err => console.log(`${err}`))
+  }
+
+  function handleUpdateAvatar(data) {
+    api
+    .editAvatar(data)
+    .then((newData) => {
+      setCurrentUser(newData);
       closeAllPopups();
     })
     .catch(err => console.log(`${err}`))
@@ -115,6 +134,7 @@ function App() {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          onUpdateUser ={handleUpdateUser}
         />
         <AddPlacePopup 
           isOpen={isAddPlacePopupOpen} 
@@ -123,11 +143,11 @@ function App() {
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          onUpdateAvatar ={handleUpdateAvatar}
         />
         <ImagePopup 
           card={selectedCard} 
           onClose={closeAllPopups} />
-        <PopupWithForm />
       </div>
       </CurrentUserContext.Provider>
     </>

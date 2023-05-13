@@ -43,6 +43,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         required
         className="form__input form__input_type_title"
         id="place-input"
+        value={name}
         onChange={handleChangeName}
       />
     <span 
@@ -56,6 +57,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
         required
         className="form__input form__input_type_link"
         id="url-input"
+        value={link}
         onChange={handleChangeLink}
     />
     <span 
