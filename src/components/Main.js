@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from "./Card";
-import { CurrentUserContext } from './contexts/CurrentUserContext.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main({ 
     cards,
@@ -31,12 +31,12 @@ function Main({
             <section className="elements">
                     {
                         cards.map((item) => {
-                            return <Card
+                            return (<Card
                                 key={item._id} 
                                 card={item} 
                                 onCardClick={onCardClick}
                                 onCardLike={onCardLike}
-                                onCardDelete={onCardDelete}/>
+                                onCardDelete={onCardDelete}/>);
                         })
                     }
             </section>

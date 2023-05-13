@@ -7,7 +7,7 @@ import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import ImagePopup from './ImagePopup.js';
-import { CurrentUserContext } from './contexts/CurrentUserContext.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
 
@@ -15,7 +15,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser , setCurrentUser ] = React.useState("");
+  const [currentUser , setCurrentUser ] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
 
@@ -117,7 +117,6 @@ function App() {
   }
 
   return (
-    <>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header />
@@ -150,7 +149,6 @@ function App() {
           onClose={closeAllPopups} />
       </div>
       </CurrentUserContext.Provider>
-    </>
   );
 }
 
